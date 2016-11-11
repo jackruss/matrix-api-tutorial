@@ -1,9 +1,8 @@
 const React = require('react')
 const medwiseApi = 'https://matrix-api-staging.medwiseadvisor.com'
 const bundle = require('./create-bundle')
-const { take, filter, toLower, append, path, lensPath,
+const { append, path, lensPath,
   head, set, compose } = require('ramda')
-let terms = null
 
 const App = React.createClass({
   getInitialState() {
@@ -98,7 +97,7 @@ const App = React.createClass({
     )
   },
   generateMatrix () {
-  
+
   },
   render () {
     const listMed = med => <li key={med.rxcui}>{med.rxcui} -  {med.name}</li>
