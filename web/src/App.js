@@ -31,7 +31,16 @@ const App = React.createClass({
     }
   },
   getToken () {
-    console.log('TODO: Get Token')
+    // Get token
+    fetch('http://localhost:4000', {
+      method: 'POST'
+    })
+    .then(res => res.json())
+    .then(res => {
+      console.log(res)
+      this.setState({token: res.token})
+    })
+
   },
   handleChange (e) {
     this.setState({query: e.target.value})
@@ -98,7 +107,14 @@ const App = React.createClass({
     )
   },
   generateMatrix () {
-    console.log('TODO: generate matrix')
+    // matrix function
+    const patientBundle = bundle(this.state.patient)
+    fetch(medwiseApi + '/matrix?token=' + this.state.token, {
+      method: 'POST', body: JSON.stringify(patientBundle)})
+      .then(res => res.json())
+      .then(data => this.setState({
+        matrix: data.url
+      }))
   },
   render () {
     const listMed = med => <li key={med.rxcui}>{med.rxcui} -  {med.name}</li>
